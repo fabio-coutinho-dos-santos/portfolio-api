@@ -8,6 +8,10 @@ export function ormConfig(): any {
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DATABASE,
     ssl: true,
+    // url:
+    //   NODE_ENV === 'test'
+    //     ? process.env.POSTGRES_TEST_URL_CONNECTION
+    //     : process.env.POSTGRES_URL_CONNECTION,
     // url: process.env.POSTGRES_URL_CONNECTION,
     synchronize: true,
     logging: false,
