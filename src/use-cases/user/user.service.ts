@@ -38,6 +38,10 @@ export class UserService {
     return this.userRepository.findOneById(id);
   }
 
+  findByEmail(email: string) {
+    return this.userRepository.findByCondition({ email: email });
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }

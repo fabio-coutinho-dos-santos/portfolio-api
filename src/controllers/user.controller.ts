@@ -6,12 +6,13 @@ import {
   Patch,
   Param,
   Delete,
-  Logger,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from '../core/dtos/users/create-user.dto';
 import { UpdateUserDto } from '../core/dtos/users/update-user.dto';
 import { UserService } from '../use-cases/user/user.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags(`Users`)
 @Controller('user')
@@ -28,6 +29,8 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);

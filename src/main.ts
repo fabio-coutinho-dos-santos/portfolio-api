@@ -11,6 +11,7 @@ async function bootstrap() {
       'Thi api execute basics operations to portfolio application',
     )
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(`${process.env.API_PREFIX}/doc`, app, document);
