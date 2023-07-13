@@ -13,6 +13,7 @@ import { UpdateUserDto } from '../core/dtos/users/update-user.dto';
 import { UserService } from '../use-cases/user/user.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { RoleGuard } from 'src/use-cases/auth/role/role.guard';
 
 @ApiTags(`Users`)
 @Controller('user')
@@ -21,6 +22,7 @@ export class UserController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
+    console.log(createUserDto);
     return this.userService.create(createUserDto);
   }
 
@@ -29,7 +31,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), RoleGuard)
   @ApiBearerAuth()
   @Get(':id')
   findOne(@Param('id') id: string) {
