@@ -1,5 +1,4 @@
-import { BeforeInsert, Column, Entity, EventSubscriber, PrimaryGeneratedColumn } from 'typeorm';
-import { hanshSync, genSaltHashSync } from 'bcrypt';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class User {
