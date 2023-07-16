@@ -25,7 +25,7 @@ export class UserService {
     const user = {
       name: createUserDto.name,
       email: createUserDto.email,
-      password: await hashSync(createUserDto.confirmPassword, genSaltSync(10)),
+      password: createUserDto.password,
     };
     return this.userRepository.create(user);
   }
