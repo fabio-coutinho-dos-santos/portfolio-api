@@ -18,4 +18,12 @@ export class CreateUserDto {
   @ApiProperty({ default: 'testPassword' })
   @IsNotEmpty()
   confirmPassword: string;
+
+  @ApiProperty({ default: '{roles:{admin, user}}' })
+  @IsNotEmpty()
+  roles: string;
+
+  @ApiProperty({ default: 1 })
+  @IsNotEmpty()
+  role: number;
 }

@@ -16,4 +16,13 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ nullable: true })
+  roles: string;
+
+  @Column({ nullable: true })
+  role: number;
+
+  @Column({ nullable: true })
+  avatar: string;
 }

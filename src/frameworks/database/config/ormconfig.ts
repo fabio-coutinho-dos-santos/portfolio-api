@@ -13,11 +13,11 @@ export function ormConfig(): any {
     //     ? process.env.POSTGRES_TEST_URL_CONNECTION
     //     : process.env.POSTGRES_URL_CONNECTION,
     // url: process.env.POSTGRES_URL_CONNECTION,
-    synchronize: true,
+    synchronize: false,
     logging: false,
     autoLoadEntities: true,
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    // useNewUrlParser: true,
     connectTimeout: parseInt(process.env.DATABASE_CONNECTION_TIME_OUT),
     acquireTimeout: parseInt(process.env.DATABASE_ACQUIRE_TIME_OUT),
     extra: {
