@@ -23,7 +23,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   roles: string;
 
-  @ApiProperty({ default: 1 })
+  @ApiProperty({ default: 'avatar' })
   @IsNotEmpty()
-  role: number;
+  avatar: number;
 }

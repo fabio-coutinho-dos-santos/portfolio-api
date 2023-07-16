@@ -6,7 +6,7 @@ export class User {
   id: number;
 
   @Column({
-    unique: true,
+    unique: false,
   })
   email: string;
 
@@ -16,12 +16,9 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ nullable: true })
+  @Column()
   roles: string;
 
-  @Column({ nullable: true })
-  role: number;
-
-  @Column({ nullable: true })
+  @Column()
   avatar: string;
 }

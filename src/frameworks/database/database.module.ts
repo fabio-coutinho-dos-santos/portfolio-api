@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DatabaseService } from './database.service';
-import { ormConfig } from './config/ormconfig';
+import { getDataSourceConfig } from '../../../ormconfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
@@ -9,7 +9,17 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     ConfigModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async () => ormConfig(),
+      useFactory: async (config: ConfigService) => ({
+        type: 'postgres',
+        url: config.get<string>('POSTGRES_URL_LOCAL'),
+        synchronize: false,
+        logging: true,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+        entities: [__dirname + '/../**/*.entity.js'],
+        migrations: ['dist/migrations/*.js'],
+      }),
       inject: [ConfigService],
     }),
   ],

@@ -8,12 +8,12 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { CreateUserDto } from '../core/dtos/users/create-user.dto';
-import { UpdateUserDto } from '../core/dtos/users/update-user.dto';
 import { UserService } from '../use-cases/user/user.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RoleGuard } from 'src/use-cases/auth/role/role.guard';
+import { CreateUserDto } from 'src/core/dtos/users/create-user.dto';
+import { UpdateUserDto } from 'src/core/dtos/users/update-user.dto';
 
 @ApiTags(`Users`)
 @Controller('user')
