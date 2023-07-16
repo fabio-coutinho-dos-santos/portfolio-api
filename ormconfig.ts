@@ -2,24 +2,25 @@ import { DataSourceOptions, DataSource } from 'typeorm';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  host: process.env.POSTGRES_HOST,
-  port: parseInt(process.env.POSTGRES_PORT),
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DATABASE,
+  host: 'dpg-cink4slph6ei90f5h8dg-a.oregon-postgres.render.com',
+  port: 5432,
+  username: 'fabio',
+  password: 'NV6PDSE4UlIamGgiwh0wZFBf4bEJbTaw',
+  database: 'portfolio_pbmp',
   // ssl: true,
   // url:
   //   NODE_ENV === 'test'
   //     ? process.env.POSTGRES_TEST_URL_CONNECTION
   //     : process.env.POSTGRES_URL_CONNECTION,
   // url: process.env.POSTGRES_URL_CONNECTION,
-  synchronize: false,
+  synchronize: true,
   logging: true,
   ssl: {
     rejectUnauthorized: false,
   },
   entities: ['dist/**/entity/*.entity.js'],
-  migrations: ['dist/database/migrations/*.js'],
+  // entities: ['src/core/entities/user.entity.ts'],
+  migrations: ['./migrations'],
   // subscribers: ['dist/observers/subscribers/*.subscriber.js'],
 };
 
