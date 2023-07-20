@@ -14,6 +14,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { RoleGuard } from 'src/use-cases/auth/role/role.guard';
 import { CreateUserDto } from 'src/core/dtos/users/create-user.dto';
 import { UpdateUserDto } from 'src/core/dtos/users/update-user.dto';
+import { Role } from 'src/use-cases/auth/role/role.decorator';
+import { roles } from 'src/use-cases/auth/role/roles';
 
 @ApiTags(`Users`)
 @Controller('user')
@@ -31,11 +33,12 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Role(roles.ADMIN)
   @UseGuards(AuthGuard('jwt'), RoleGuard)
   @ApiBearerAuth()
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.userService.findOne(id);
   }
 
   @Patch(':id')

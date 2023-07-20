@@ -7,7 +7,7 @@ export function ormConfig(configService): any {
     type: 'postgres',
     url: configService.get('POSTGRES_URL_LOCAL'),
     synchronize: false,
-    logging: true,
+    logging: false,
     ssl: {
       rejectUnauthorized: false,
     },

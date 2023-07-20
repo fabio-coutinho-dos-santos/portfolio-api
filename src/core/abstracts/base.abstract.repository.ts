@@ -1,4 +1,4 @@
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { BaseInterfaceRepository } from '../interfaces/base.interface.repository';
 
 export abstract class BaseAbstractRepository<T>
@@ -31,6 +31,10 @@ export abstract class BaseAbstractRepository<T>
 
   public async findAll(): Promise<T[]> {
     return await this.entity.find();
+  }
+
+  public async updateOne(id: number, object: any): Promise<UpdateResult> {
+    return await this.entity.update(id, object);
   }
 
   public async remove(id: number): Promise<DeleteResult> {
