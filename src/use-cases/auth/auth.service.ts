@@ -14,17 +14,17 @@ export class AuthService {
   private TIME_EXPIRATION_REFRESH_TOKEN = '30d';
 
   async login(user) {
-    const tokens = await this.getTokens(user.id, user.email, user.roles);
+    const tokens = await this.getTokens(user.id, user.email, user.role);
     return tokens;
   }
 
-  async getTokens(userId: string, email: string, roles: string[]) {
+  async getTokens(userId: string, email: string, role: string[]) {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(
         {
           sub: userId,
           email: email,
-          roles: roles,
+          role: role,
         },
         {
           expiresIn: this.TIME_EXPIRATION_ACCESS_TOKEN,
@@ -34,7 +34,7 @@ export class AuthService {
         {
           sub: userId,
           email: email,
-          roles: roles,
+          role: role,
         },
         {
           expiresIn: this.TIME_EXPIRATION_REFRESH_TOKEN,

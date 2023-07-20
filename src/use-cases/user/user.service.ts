@@ -4,6 +4,7 @@ import {
   Inject,
   Injectable,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { CreateUserDto } from '../../core/dtos/users/create-user.dto';
 import { UpdateUserDto } from '../../core/dtos/users/update-user.dto';
@@ -26,6 +27,8 @@ export class UserService {
       name: createUserDto.name,
       email: createUserDto.email,
       password: createUserDto.password,
+      role: createUserDto.role,
+      avatar: createUserDto.avatar,
     };
     return this.userRepository.create(user);
   }
@@ -34,16 +37,21 @@ export class UserService {
     return this.userRepository.findAll();
   }
 
-  findOne(id: number) {
-    return this.userRepository.findOneById(id);
+  async findOne(id: number) {
+    const user = await this.userRepository.findOneById(id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 
   findByEmail(email: string) {
     return this.userRepository.findByCondition({ email: email });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const newUser = await this.userRepository.updateOne(id, updateUserDto);
+    return this.findOne(id);
   }
 
   remove(id: number) {
