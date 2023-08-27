@@ -18,7 +18,7 @@ import { Role } from 'src/use-cases/auth/role/role.decorator';
 import { roles } from 'src/use-cases/auth/role/roles';
 
 @ApiTags(`Users`)
-@Controller('user')
+@Controller('api/v1/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

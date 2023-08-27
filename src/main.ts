@@ -16,6 +16,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(`${process.env.API_PREFIX}/doc`, app, document);
   app.useGlobalPipes(new ValidationPipe());
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    next();
+  });
   const port = parseInt(process.env.SERVER_PORT);
   await app.listen(port);
 }
