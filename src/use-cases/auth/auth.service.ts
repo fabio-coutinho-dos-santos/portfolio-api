@@ -10,8 +10,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  private TIME_EXPIRATION_ACCESS_TOKEN = '3d';
-  private TIME_EXPIRATION_REFRESH_TOKEN = '30d';
+  private TIME_EXPIRATION_ACCESS_TOKEN = '1h';
+  private TIME_EXPIRATION_REFRESH_TOKEN = '15d';
 
   async login(user) {
     const tokens = await this.getTokens(user.id, user.email, user.role);
@@ -35,6 +35,8 @@ export class AuthService {
           sub: userId,
           email: email,
           role: role,
+          issuer: 'https://refreshToken.test',
+          audience: 'RefreshToken.API',
         },
         {
           expiresIn: this.TIME_EXPIRATION_REFRESH_TOKEN,
@@ -49,7 +51,6 @@ export class AuthService {
   }
 
   async validateUser(email: string, password: string) {
-    console.log(email);
     const user = await this.userService.findByEmail(email);
     if (!user) {
       throw new BadRequestException('Invalid email');
@@ -61,5 +62,16 @@ export class AuthService {
     }
 
     return user;
+  }
+
+  async refreshLogin(user: any) {
+    await this.validateUserPermissions(user);
+    const tokens = await this.getTokens(user.id, user.email, user.role);
+    return tokens;
+  }
+
+  async validateUserPermissions(user) {
+    // validate user permitions, roles and claims
+    return Promise.resolve(true);
   }
 }

@@ -5,7 +5,7 @@ import { DataSourceOptions, DataSource } from 'typeorm';
 export function ormConfig(configService): any {
   return {
     type: 'postgres',
-    url: configService.get('POSTGRES_URL_LOCAL'),
+    url: configService.get('POSTGRES_URL_CONNECTION'),
     synchronize: false,
     logging: false,
     ssl: {
