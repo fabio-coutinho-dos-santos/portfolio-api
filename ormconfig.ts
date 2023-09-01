@@ -4,13 +4,13 @@ import { DataSourceOptions, DataSource } from 'typeorm';
 
 export function ormConfig(configService): any {
   return {
-    type: 'postgres',
-    url: configService.get('POSTGRES_URL_CONNECTION'),
+    type: 'mongodb',
+    url: configService.get('MONGO_URL_CONNECTION'),
     synchronize: false,
     logging: false,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    // ssl: {
+    //   rejectUnauthorized: false,
+    // },
     entities: [__dirname + '/../**/*.entity.js'],
     migrations: ['dist/migrations/*.js'],
   };
