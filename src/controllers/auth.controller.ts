@@ -12,7 +12,7 @@ import { LoginAuthDto } from 'src/core/dtos/auth/login-auth.dto';
 import { AuthService } from 'src/use-cases/auth/auth.service';
 
 @ApiTags('Authentication')
-@Controller('auth')
+@Controller('api/v1/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
