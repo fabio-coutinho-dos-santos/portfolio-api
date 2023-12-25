@@ -3,7 +3,7 @@ import AwsNotificationServiceInterface from "src/frameworks/notification/aws-sns
 import { AwsSnsProtocols } from "src/frameworks/notification/aws-sns/aws-sns-protocol.enum";
 
 export class SetNewSnsClient {
-  constructor(private readonly notificationService: AwsNotificationServiceInterface|AwsNotificationServiceInterface) { }
+  constructor(private readonly notificationService: AwsNotificationServiceInterface) { }
 
   async createNewSnsTopic(topicName: string): Promise<any> {
     try {

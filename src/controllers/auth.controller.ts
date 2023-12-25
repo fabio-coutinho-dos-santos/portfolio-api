@@ -12,6 +12,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoginAuthDto } from 'src/core/dtos/auth/login-auth.dto';
+import AwsNotificationServiceInterface from 'src/frameworks/notification/aws-sns/aws-notification-service.interface';
 import { AwsSnsProtocols } from 'src/frameworks/notification/aws-sns/aws-sns-protocol.enum';
 import AwsNotificationService from 'src/frameworks/notification/aws-sns/aws.notification.service';
 import NotificationServiceInterface from 'src/frameworks/notification/notification-service.interface';
@@ -24,7 +25,7 @@ import { SetNewSnsClient } from 'src/use-cases/notification/set-new-client';
 export class AuthController {
   constructor(
     @Inject('NotificationServiceInterface')
-    private readonly notificationService: AwsNotificationService,
+    private readonly notificationService: AwsNotificationServiceInterface,
     private readonly authService: AuthService
   ) { }
 
