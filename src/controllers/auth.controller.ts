@@ -32,7 +32,8 @@ export class AuthController {
     @Ip() ip
   ) {
     try {
-      this.notificationService.notify(`Access from IP: ${ip}`, process.env.AWS_SNS_TOPIC)
+      console.log(req);
+      this.notificationService.notify(`Access from IP: ${ip} - public IP:${req.clientIp}`, process.env.AWS_SNS_TOPIC)
     } catch (e: any) {
       Logger.error('Error on send IP', 'NotificationService');
     }
